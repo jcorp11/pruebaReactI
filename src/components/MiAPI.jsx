@@ -1,4 +1,5 @@
 import fetchData from "../utils/fetchData";
+import cap from "../utils/capitalize";
 import PokemonCard from "./PokemonCard";
 import { useEffect, useState } from "react";
 import styles from "../components/css/MiAPI.module.css";
@@ -67,7 +68,7 @@ const MiAPI = ({ pokemonType, pokemonStat }) => {
 
   return (
     <div>
-      <h2>Pokemones Electric:</h2>
+      <h2>Pokemones {cap(pokemonType)}:</h2>
 
       <section className={styles.cardContainer}>
         {showPokemon.map((pokemon) => (
