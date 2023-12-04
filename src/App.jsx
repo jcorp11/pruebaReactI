@@ -5,10 +5,11 @@ import Selector from "./components/Selector";
 
 function App() {
   const [pokemonType, setPokemonType] = useState("");
+  const [pokemonStat, setPokemonStat] = useState("");
   return (
     <div>
-      <Selector {...{ setPokemonType }} />
-      <MiAPI {...{ pokemonType }} />
+      <Selector {...{ setPokemonType, setPokemonStat }} />
+      <MiAPI {...{ pokemonType, pokemonStat }} />
     </div>
   );
 }
