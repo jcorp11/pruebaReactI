@@ -3,7 +3,16 @@ import PokemonCard from "./PokemonCard";
 import { useEffect, useState } from "react";
 import styles from "../components/css/MiAPI.module.css";
 
-const MiAPI = ({ pokemonType }) => {
+const statsmap = {
+  hp: 0,
+  attack: 1,
+  defense: 2,
+  "special-attack": 3,
+  "special-defense": 4,
+  speed: 5,
+};
+
+const MiAPI = ({ pokemonType, pokemonStat }) => {
   const [pokemonList, setPokemonList] = useState([]);
   const [showPokemon, setShowPokemon] = useState([]);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
@@ -13,8 +22,8 @@ const MiAPI = ({ pokemonType }) => {
     try {
       fetchData(`https://pokeapi.co/api/v2/type/${pokemonType}`)
         .then((data) => {
-          setPokemonList(data.pokemon.slice(0, 10));
-          console.log(data.pokemon.slice(0, 10));
+          setPokemonList(data.pokemon.slice(0, 5));
+          //   console.log(data.pokemon.slice(0, 10));
         })
         .catch((error) => {
           console.error(
@@ -31,12 +40,26 @@ const MiAPI = ({ pokemonType }) => {
     Promise.all(pokemonList.map((pokemon) => fetchData(pokemon.pokemon.url)))
       .then((data) => {
         setShowPokemon(data);
-        console.log(data);
+        // console.log(data);
       })
       .catch((error) =>
         console.error("Error fetching Pokémon details:", error)
       );
   }, [pokemonList]);
+
+  useEffect(() => {
+    if (!pokemonStat) return;
+
+    const sortedPokemon = [...showPokemon].sort((a, b) => {
+      //   console.log({ b, a, stat: statsmap[pokemonStat] });
+      return (
+        b.stats[statsmap[pokemonStat]].base_stat -
+        a.stats[statsmap[pokemonStat]].base_stat
+      );
+    });
+    setShowPokemon(sortedPokemon);
+    console.log(sortedPokemon);
+  }, [pokemonStat]);
 
   const handlePokemonClick = (pokemon) => {
     setSelectedPokemon(pokemon);

@@ -8,7 +8,7 @@ const Selector = ({ setPokemonType, setPokemonStat }) => {
           className="form-select"
           onChange={(e) => setPokemonType(e.target.value)}
         >
-          <option selected>Elige un tipo de pokemon</option>
+          <option defaultValue={""}>Elige un tipo de pokemon</option>
           <option value="electric">Electric</option>
           <option value="fire">Fire</option>
           <option value="water">Water</option>
@@ -18,7 +18,7 @@ const Selector = ({ setPokemonType, setPokemonStat }) => {
           className="form-select"
           onChange={(e) => setPokemonStat(e.target.value)}
         >
-          <option selected>Elige una stat para ordenar</option>
+          <option defaultValue={""}>Elige una stat para ordenar</option>
           <option value="attack">Attack</option>
           <option value="hp">HP</option>
           <option value="defense">Defense</option>
