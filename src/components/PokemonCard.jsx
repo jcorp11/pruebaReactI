@@ -4,11 +4,13 @@ import styles from "./css/PokemonCard.module.css";
 const PokemonCard = ({ pokemon }) => {
   return (
     <div className="card" style={{ width: "20rem", margin: "20px" }}>
-      <img
-        src={pokemon.sprites.front_default}
-        alt={pokemon.name}
-        className="card-img-top"
-      />
+      <section className={`${styles.imagenContainer}`}>
+        <img
+          src={pokemon.sprites.front_default}
+          alt={pokemon.name}
+          className={`card-img-top ${styles.imagen}`}
+        />
+      </section>
       <div className="card-body">
         <h5 className="card-title">{cap(pokemon.name)}</h5>
         <section className={styles.containerHeightWeight}>
@@ -35,7 +37,7 @@ const PokemonCard = ({ pokemon }) => {
               key={stat.stat.name}
               className={`${styles.statContainer} list-group-item`}
             >
-              <p>{stat.stat.name}:</p>
+              <p>{cap(stat.stat.name)}:</p>
               <p>{stat.base_stat}</p>
             </li>
           ))}

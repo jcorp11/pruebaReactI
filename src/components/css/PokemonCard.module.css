@@ -1,3 +1,16 @@
+.imagenContainer {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagen {
+  border: 2px solid rgb(195, 191, 191);
+  width: 80%;
+  border-radius: 10px;
+}
+
 .containerHeightWeight {
   display: flex;
 
