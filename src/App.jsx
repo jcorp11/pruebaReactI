@@ -6,10 +6,13 @@ import Selector from "./components/Selector";
 function App() {
   const [pokemonType, setPokemonType] = useState("");
   const [pokemonStat, setPokemonStat] = useState("");
+  const [pokeName, setPokeName] = useState("");
   return (
     <div>
-      <Selector {...{ setPokemonType, setPokemonStat }} />
-      <MiAPI {...{ pokemonType, pokemonStat }} />
+      <Selector
+        {...{ setPokemonType, setPokemonStat, setPokeName, pokeName }}
+      />
+      <MiAPI {...{ pokemonType, pokemonStat, pokeName }} />
     </div>
   );
 }

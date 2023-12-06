@@ -16,14 +16,14 @@ const statsmap = {
 const MiAPI = ({ pokemonType, pokemonStat }) => {
   const [pokemonList, setPokemonList] = useState([]);
   const [showPokemon, setShowPokemon] = useState([]);
-  const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   useEffect(() => {
     if (!pokemonType) return;
     try {
       fetchData(`https://pokeapi.co/api/v2/type/${pokemonType}`)
         .then((data) => {
-          setPokemonList(data.pokemon.slice(0, 5));
+          setPokemonList(data.pokemon);
+          // setPokemonList(data.pokemon.slice(0, 5));
           //   console.log(data.pokemon.slice(0, 10));
         })
         .catch((error) => {
@@ -62,44 +62,15 @@ const MiAPI = ({ pokemonType, pokemonStat }) => {
     console.log(sortedPokemon);
   }, [pokemonStat]);
 
-  const handlePokemonClick = (pokemon) => {
-    setSelectedPokemon(pokemon);
-  };
-
   return (
-    <div>
-      <h2>Pokemones {cap(pokemonType)}:</h2>
+    <div className={styles.container}>
+      <h2>{cap(pokemonType)} Pokemon:</h2>
 
       <section className={styles.cardContainer}>
         {showPokemon.map((pokemon) => (
-          <PokemonCard
-            key={pokemon.id}
-            pokemon={pokemon}
-            onClick={handlePokemonClick}
-          />
+          <PokemonCard key={pokemon.id} pokemon={pokemon} />
         ))}
       </section>
-
-      {selectedPokemon && (
-        <div>
-          <h2>{selectedPokemon.name}</h2>
-          <img
-            src={selectedPokemon.sprites.front_default}
-            alt={selectedPokemon.name}
-          />
-          <p>Height: {selectedPokemon.height}</p>
-          <p>Weight: {selectedPokemon.weight}</p>
-
-          <h3>Stats:</h3>
-          <ul>
-            {selectedPokemon.stats.map((stat) => (
-              <li key={stat.stat.name}>
-                {stat.stat.name}: {stat.base_stat}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 };

@@ -2,8 +2,17 @@ import cap from "../utils/capitalize";
 import styles from "./css/PokemonCard.module.css";
 
 const PokemonCard = ({ pokemon }) => {
+  const statAbr = {
+    hp: "Hp",
+    attack: "Atk",
+    defense: "Def",
+    "special-attack": "SpA",
+    "special-defense": "SpD",
+    speed: "Spe",
+  };
+
   return (
-    <div className="card" style={{ width: "20rem", margin: "20px" }}>
+    <div className="card" style={{ width: "20rem" }}>
       <section className={`${styles.imagenContainer}`}>
         <img
           src={pokemon.sprites.front_default}
@@ -37,7 +46,7 @@ const PokemonCard = ({ pokemon }) => {
               key={stat.stat.name}
               className={`${styles.statContainer} list-group-item`}
             >
-              <p>{cap(stat.stat.name)}:</p>
+              <p>{statAbr[stat.stat.name]}:</p>
               <p>{stat.base_stat}</p>
             </li>
           ))}
