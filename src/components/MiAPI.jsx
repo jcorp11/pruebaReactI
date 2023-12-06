@@ -13,10 +13,14 @@ const statsmap = {
   speed: 5,
 };
 
-const MiAPI = ({ pokemonType, pokemonStat }) => {
-  const [pokemonList, setPokemonList] = useState([]);
-  const [showPokemon, setShowPokemon] = useState([]);
-
+const MiAPI = ({
+  pokemonType,
+  pokemonStat,
+  pokemonList,
+  showPokemon,
+  setPokemonList,
+  setShowPokemon,
+}) => {
   useEffect(() => {
     if (!pokemonType) return;
     try {
@@ -59,7 +63,7 @@ const MiAPI = ({ pokemonType, pokemonStat }) => {
       );
     });
     setShowPokemon(sortedPokemon);
-    console.log(sortedPokemon);
+    // console.log(sortedPokemon);
   }, [pokemonStat]);
 
   return (

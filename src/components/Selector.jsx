@@ -5,6 +5,8 @@ const Selector = ({
   setPokemonStat,
   setPokeName,
   pokeName,
+  showPokemon,
+  setShowPokemon,
 }) => {
   const pokeTypes = [
     "electric",
@@ -26,6 +28,17 @@ const Selector = ({
     "poison",
     "fighting",
   ];
+
+  const handleTextChange = (e) => {
+    // setPokeName(e.target.value);
+    if (e.target.value === "") return;
+
+    setShowPokemon(
+      showPokemon.filter((pokemon) =>
+        pokemon.name.toLowerCase().includes(e.target.value.toLowerCase())
+      )
+    );
+  };
 
   return (
     <>
@@ -65,8 +78,8 @@ const Selector = ({
             type="text"
             className="form-control"
             placeholder="Ingresa el nombre"
-            value={pokeName}
-            onChange={(e) => setPokeName(e.target.value)}
+            // value={pokeName}
+            onChange={(e) => handleTextChange(e)}
           />
         </section>
       </section>

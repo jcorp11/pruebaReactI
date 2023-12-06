@@ -1,5 +1,6 @@
 import cap from "../utils/capitalize";
 import styles from "./css/PokemonCard.module.css";
+import { v4 as uuidv4 } from "uuid";
 
 const PokemonCard = ({ pokemon }) => {
   const statAbr = {
@@ -31,7 +32,7 @@ const PokemonCard = ({ pokemon }) => {
         <ul className={`${styles.abilityContainer} list-group`}>
           {pokemon.abilities.map((ability) => (
             <li
-              key={ability.ability.name}
+              key={uuidv4()}
               className={`${styles.abilityItem} list-group-item `}
             >
               {ability.ability.name}
@@ -43,7 +44,7 @@ const PokemonCard = ({ pokemon }) => {
         <ul className={`${styles.statGroup} list-group`}>
           {pokemon.stats.map((stat) => (
             <li
-              key={stat.stat.name}
+              key={uuidv4()}
               className={`${styles.statContainer} list-group-item`}
             >
               <p>{statAbr[stat.stat.name]}:</p>
