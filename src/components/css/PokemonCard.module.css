@@ -68,3 +68,13 @@
     margin-bottom: 0;
   }
 }
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+/* .statWrapper {
+  margin-top: auto;
+} */

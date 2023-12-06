@@ -21,7 +21,7 @@ const PokemonCard = ({ pokemon }) => {
           className={`card-img-top ${styles.imagen}`}
         />
       </section>
-      <div className="card-body">
+      <div className={`card-body ${styles.cardBody}`}>
         <h5 className="card-title">{cap(pokemon.name)}</h5>
         <section className={styles.containerHeightWeight}>
           <p className="card-text">Height: {pokemon.height}</p>
@@ -40,18 +40,20 @@ const PokemonCard = ({ pokemon }) => {
           ))}
         </ul>
 
-        <h6>Stats:</h6>
-        <ul className={`${styles.statGroup} list-group`}>
-          {pokemon.stats.map((stat) => (
-            <li
-              key={uuidv4()}
-              className={`${styles.statContainer} list-group-item`}
-            >
-              <p>{statAbr[stat.stat.name]}:</p>
-              <p>{stat.base_stat}</p>
-            </li>
-          ))}
-        </ul>
+        <section className={styles.statWrapper}>
+          <h6>Stats:</h6>
+          <ul className={`${styles.statGroup} list-group`}>
+            {pokemon.stats.map((stat) => (
+              <li
+                key={uuidv4()}
+                className={`${styles.statContainer} list-group-item`}
+              >
+                <p>{statAbr[stat.stat.name]}:</p>
+                <p>{stat.base_stat}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
     </div>
   );
