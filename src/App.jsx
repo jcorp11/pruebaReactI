@@ -8,6 +8,7 @@ function App() {
   const [pokemonStat, setPokemonStat] = useState("");
   const [pokeName, setPokeName] = useState("");
   const [pokemonList, setPokemonList] = useState([]);
+  const [pokemonArray, setPokemonArray] = useState([]);
   const [showPokemon, setShowPokemon] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -21,6 +22,8 @@ function App() {
           pokeName,
           showPokemon,
           setShowPokemon,
+          pokemonArray,
+          setPokemonArray,
         }}
       />
       <MiAPI
@@ -35,6 +38,8 @@ function App() {
           setLoading,
           error,
           setError,
+          setPokemonArray,
+          pokemonArray,
         }}
       />
     </div>

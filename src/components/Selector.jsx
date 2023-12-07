@@ -7,6 +7,8 @@ const Selector = ({
   pokeName,
   showPokemon,
   setShowPokemon,
+  pokemonArray,
+  setPokemonArray,
 }) => {
   const pokeTypes = [
     "electric",
@@ -31,10 +33,10 @@ const Selector = ({
 
   const handleTextChange = (e) => {
     // setPokeName(e.target.value);
-    if (e.target.value === "") return;
+    // if (e.target.value === "") return;
 
     setShowPokemon(
-      showPokemon.filter((pokemon) =>
+      pokemonArray.filter((pokemon) =>
         pokemon.name.toLowerCase().includes(e.target.value.toLowerCase())
       )
     );

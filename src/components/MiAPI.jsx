@@ -24,6 +24,8 @@ const MiAPI = ({
   setLoading,
   error,
   setError,
+  setPokemonArray,
+  pokemonArray,
 }) => {
   useEffect(() => {
     if (!pokemonType) return;
@@ -38,7 +40,7 @@ const MiAPI = ({
         }
       );
     } catch (error) {
-      console.error("Error in useEffect:", error);
+      console.error("Error in useEffect - 1:", error);
       setLoading(false);
       setError(true);
     }
@@ -51,6 +53,7 @@ const MiAPI = ({
       ).then((data) => {
         setLoading(false);
         setError(false);
+        setPokemonArray(data);
         setShowPokemon(data);
       });
     } catch (error) {
@@ -63,7 +66,7 @@ const MiAPI = ({
   useEffect(() => {
     if (!pokemonStat) return;
 
-    const sortedPokemon = [...showPokemon].sort((a, b) => {
+    const sortedPokemon = [...pokemonArray].sort((a, b) => {
       return (
         b.stats[statsmap[pokemonStat]].base_stat -
         a.stats[statsmap[pokemonStat]].base_stat
