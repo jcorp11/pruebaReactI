@@ -9,6 +9,8 @@ function App() {
   const [pokeName, setPokeName] = useState("");
   const [pokemonList, setPokemonList] = useState([]);
   const [showPokemon, setShowPokemon] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   return (
     <div>
       <Selector
@@ -29,6 +31,10 @@ function App() {
           showPokemon,
           setPokemonList,
           setShowPokemon,
+          loading,
+          setLoading,
+          error,
+          setError,
         }}
       />
     </div>

@@ -20,61 +20,73 @@ const MiAPI = ({
   showPokemon,
   setPokemonList,
   setShowPokemon,
+  loading,
+  setLoading,
+  error,
+  setError,
 }) => {
   useEffect(() => {
     if (!pokemonType) return;
+
+    setLoading(true);
+    setError(false);
+
     try {
-      fetchData(`https://pokeapi.co/api/v2/type/${pokemonType}`)
-        .then((data) => {
+      fetchData(`https://pokeapi.co/api/v2/type/${pokemonType}`).then(
+        (data) => {
           setPokemonList(data.pokemon);
-          // setPokemonList(data.pokemon.slice(0, 5));
-          //   console.log(data.pokemon.slice(0, 10));
-        })
-        .catch((error) => {
-          console.error(
-            `Error fetching ${pokemonType}-type Pokémon list:`,
-            error
-          );
-        });
+        }
+      );
     } catch (error) {
       console.error("Error in useEffect:", error);
+      setLoading(false);
+      setError(true);
     }
   }, [pokemonType]);
 
   useEffect(() => {
-    Promise.all(pokemonList.map((pokemon) => fetchData(pokemon.pokemon.url)))
-      .then((data) => {
+    try {
+      Promise.all(
+        pokemonList.map((pokemon) => fetchData(pokemon.pokemon.url))
+      ).then((data) => {
+        setLoading(false);
+        setError(false);
         setShowPokemon(data);
-        // console.log(data);
-      })
-      .catch((error) =>
-        console.error("Error fetching Pokémon details:", error)
-      );
+      });
+    } catch (error) {
+      console.error("Error in useEffect:", error);
+      setLoading(false);
+      setError(true);
+    }
   }, [pokemonList]);
 
   useEffect(() => {
     if (!pokemonStat) return;
 
     const sortedPokemon = [...showPokemon].sort((a, b) => {
-      //   console.log({ b, a, stat: statsmap[pokemonStat] });
       return (
         b.stats[statsmap[pokemonStat]].base_stat -
         a.stats[statsmap[pokemonStat]].base_stat
       );
     });
     setShowPokemon(sortedPokemon);
-    // console.log(sortedPokemon);
   }, [pokemonStat]);
 
   return (
     <div className={styles.container}>
-      <h2>{cap(pokemonType)} Pokemon:</h2>
+      {loading && <h1 className={styles.errLoad}>Loading...</h1>}
+      {error && <h1 className={styles.errLoad}>Error Fetching Data</h1>}
+      {!loading && !error && (
+        <>
+          <h2>{cap(pokemonType)} Pokemon:</h2>
 
-      <section className={styles.cardContainer}>
-        {showPokemon.map((pokemon) => (
-          <PokemonCard key={pokemon.id} pokemon={pokemon} />
-        ))}
-      </section>
+          <section className={styles.cardContainer}>
+            {showPokemon.map((pokemon) => (
+              <PokemonCard key={pokemon.id} pokemon={pokemon} />
+            ))}
+          </section>
+        </>
+      )}
     </div>
   );
 };
