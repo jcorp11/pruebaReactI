@@ -7,7 +7,6 @@ function App() {
   const [pokemonType, setPokemonType] = useState("");
   const [pokemonStat, setPokemonStat] = useState("");
   const [pokeName, setPokeName] = useState("");
-  const [pokemonList, setPokemonList] = useState([]);
   const [pokemonArray, setPokemonArray] = useState([]);
   const [showPokemon, setShowPokemon] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -30,9 +29,7 @@ function App() {
         {...{
           pokemonType,
           pokemonStat,
-          pokemonList,
           showPokemon,
-          setPokemonList,
           setShowPokemon,
           loading,
           setLoading,

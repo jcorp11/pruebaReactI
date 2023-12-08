@@ -16,9 +16,7 @@ const statsmap = {
 const MiAPI = ({
   pokemonType,
   pokemonStat,
-  pokemonList,
   showPokemon,
-  setPokemonList,
   setShowPokemon,
   loading,
   setLoading,
@@ -34,34 +32,31 @@ const MiAPI = ({
     setError(false);
 
     try {
-      fetchData(`https://pokeapi.co/api/v2/type/${pokemonType}`).then(
-        (data) => {
-          setPokemonList(data.pokemon);
-        }
-      );
+      fetchData(`https://pokeapi.co/api/v2/type/${pokemonType}`)
+        .then((data) => {
+          const pokeList = data.pokemon;
+          // console.log(pokeList);
+          return Promise.all(
+            pokeList.map((pokemon) => fetchData(pokemon.pokemon.url))
+          );
+        })
+        .then((data) => {
+          setPokemonArray(data);
+          setShowPokemon(data);
+          setLoading(false);
+          setError(false);
+        })
+        .catch((error) => {
+          console.error("Error in useEffect - 2:", error);
+          setLoading(false);
+          setError(true);
+        });
     } catch (error) {
       console.error("Error in useEffect - 1:", error);
       setLoading(false);
       setError(true);
     }
   }, [pokemonType]);
-
-  useEffect(() => {
-    try {
-      Promise.all(
-        pokemonList.map((pokemon) => fetchData(pokemon.pokemon.url))
-      ).then((data) => {
-        setLoading(false);
-        setError(false);
-        setPokemonArray(data);
-        setShowPokemon(data);
-      });
-    } catch (error) {
-      console.error("Error in useEffect:", error);
-      setLoading(false);
-      setError(true);
-    }
-  }, [pokemonList]);
 
   useEffect(() => {
     if (!pokemonStat) return;
