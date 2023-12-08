@@ -3,12 +3,9 @@ import cap from "../utils/capitalize";
 const Selector = ({
   setPokemonType,
   setPokemonStat,
-  setPokeName,
-  pokeName,
-  showPokemon,
   setShowPokemon,
   pokemonArray,
-  setPokemonArray,
+  pokemonStat,
 }) => {
   const pokeTypes = [
     "electric",
@@ -64,6 +61,7 @@ const Selector = ({
           <select
             className="form-select"
             onChange={(e) => setPokemonStat(e.target.value)}
+            value={pokemonStat}
           >
             <option value={""}>Elige una stat para ordenar</option>
             <option value="attack">Attack</option>

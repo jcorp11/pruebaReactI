@@ -6,7 +6,6 @@ import Selector from "./components/Selector";
 function App() {
   const [pokemonType, setPokemonType] = useState("");
   const [pokemonStat, setPokemonStat] = useState("");
-  const [pokeName, setPokeName] = useState("");
   const [pokemonArray, setPokemonArray] = useState([]);
   const [showPokemon, setShowPokemon] = useState([]);
 
@@ -16,12 +15,9 @@ function App() {
         {...{
           setPokemonType,
           setPokemonStat,
-          setPokeName,
-          pokeName,
-          showPokemon,
+          pokemonStat,
           setShowPokemon,
           pokemonArray,
-          setPokemonArray,
         }}
       />
       <MiAPI
@@ -32,6 +28,7 @@ function App() {
           setShowPokemon,
           setPokemonArray,
           pokemonArray,
+          setPokemonStat,
         }}
       />
     </div>

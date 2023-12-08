@@ -16,6 +16,7 @@ const statsmap = {
 const MiAPI = ({
   pokemonType,
   pokemonStat,
+  setPokemonStat,
   showPokemon,
   setShowPokemon,
   setPokemonArray,
@@ -44,6 +45,7 @@ const MiAPI = ({
           setShowPokemon(data);
           setLoading(false);
           setError(false);
+          setPokemonStat("");
         })
         .catch((error) => {
           console.error("Error in useEffect - 2:", error);
@@ -66,6 +68,7 @@ const MiAPI = ({
         a.stats[statsmap[pokemonStat]].base_stat
       );
     });
+    setPokemonArray(sortedPokemon);
     setShowPokemon(sortedPokemon);
   }, [pokemonStat]);
 
