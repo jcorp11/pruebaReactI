@@ -18,13 +18,12 @@ const MiAPI = ({
   pokemonStat,
   showPokemon,
   setShowPokemon,
-  loading,
-  setLoading,
-  error,
-  setError,
   setPokemonArray,
   pokemonArray,
 }) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
   useEffect(() => {
     if (!pokemonType) return;
 
